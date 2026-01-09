@@ -1,0 +1,33 @@
+shader_type canvas_item;
+
+uniform vec4 line_color : source_color = vec4(1.0);
+uniform float line_thickness : hint_range(0, 10) = 1.0;
+varying vec4 modulate_color;
+
+
+const vec2 OFFSETS[8] = {
+	vec2(-1, -1), vec2(-1, 0), vec2(-1, 1), vec2(0, -1), vec2(0, 1),
+	vec2(1, -1), vec2(1, 0), vec2(1, 1)
+};
+
+void vertex() {
+	modulate_color = COLOR;
+}
+
+void fragment() {
+	vec2 size = TEXTURE_PIXEL_SIZE * line_thickness;
+	float outline = 0.0;
+
+	for (int i = 0; i < OFFSETS.length(); i++) {
+		outline += texture(TEXTURE, UV + size * OFFSETS[i]).a;
+	}
+	outline = min(outline, 1.0);
+
+	vec4 color = texture(TEXTURE, UV); // multiply by the color to add modulate
+	color *= modulate_color;
+
+	// Blend sprite and outline
+	vec4 final_color = mix(color, line_color, outline - color.a);
+
+	COLOR = final_color;
+}

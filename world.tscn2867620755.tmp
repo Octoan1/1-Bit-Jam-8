@@ -26,6 +26,8 @@ tile_set = ExtResource("1_aqk2v")
 
 [node name="Player" parent="." instance=ExtResource("2_fj7yv")]
 SPEED = 50.0
+MAX_JUMP_VELOCITY = -100.0
+MIN_JUMP_VELOCITY = -20
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 
