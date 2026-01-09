@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=4 uid="uid://dkqshmfs6igba"]
 
-[ext_resource type="TileSet" uid="uid://bmsamqmdr3vuh" path="res://tileset.tres" id="1_fj7yv"]
+[ext_resource type="TileSet" uid="uid://bmsamqmdr3vuh" path="res://tileset_256x256.tres" id="1_fj7yv"]
 [ext_resource type="PackedScene" uid="uid://crjun1osn8gvr" path="res://player.tscn" id="2_fj7yv"]
 [ext_resource type="Shader" uid="uid://biaqnxmcmmmyr" path="res://Scripts/outline.gdshader" id="3_aqk2v"]
 [ext_resource type="Texture2D" uid="uid://citcqautofykg" path="res://Assets/monster2.png" id="4_036b0"]
