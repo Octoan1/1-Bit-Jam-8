@@ -1,9 +1,9 @@
 [gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bmsamqmdr3vuh"]
 
-[ext_resource type="Texture2D" uid="uid://c7r4jacie15tw" path="res://Assets/tiles.png" id="1_2urvg"]
+[ext_resource type="Texture2D" uid="uid://b01rng6k5o1t0" path="res://Assets/Tiles/tiles 256x256.png" id="1_8v8vc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fj7yv"]
-texture = ExtResource("1_2urvg")
+texture = ExtResource("1_8v8vc")
 0:0/0 = 0
 0:0/0/terrain_set = 0
 0:0/0/terrain = 0
@@ -197,9 +197,14 @@ texture = ExtResource("1_2urvg")
 6:0/0/terrain_set = 0
 6:0/0/terrain = 0
 6:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:3/0 = 0
+0:3/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [resource]
 physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 2
+physics_layer_1/collision_layer = 4
+physics_layer_1/collision_mask = 2
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Walls"
 terrain_set_0/terrain_0/color = Color(0.65033746, 0.00012648762, 0.57908493, 1)

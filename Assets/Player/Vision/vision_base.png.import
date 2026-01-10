@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfs32xt3eg4r0"
-path="res://.godot/imported/vision_lines.png-b8cddad808d49712380c58c74c30872e.ctex"
+uid="uid://6g7agk6hahat"
+path="res://.godot/imported/vision_base.png-f807db7f196b668ca0fb30aa9056dd66.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/vision_lines.png"
-dest_files=["res://.godot/imported/vision_lines.png-b8cddad808d49712380c58c74c30872e.ctex"]
+source_file="res://Assets/Player/Vision/vision_base.png"
+dest_files=["res://.godot/imported/vision_base.png-f807db7f196b668ca0fb30aa9056dd66.ctex"]
 
 [params]
 

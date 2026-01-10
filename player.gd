@@ -6,9 +6,10 @@ extends CharacterBody2D
 @export var SPEED = 100.0
 @export var JUMP_VELOCITY = -200.0
 @export var CUT_JUMP_VELOCITY = -10
-var vel_storage := 0
+var vel_storage : float = 0
 var can_jump : bool = true
 var gravity
+@onready var jump_progress_bar: TextureProgressBar = $JumpProgressBar
 
 
 func _ready() -> void:
@@ -19,10 +20,10 @@ func _physics_process(delta: float) -> void:
 	
 	# Add the gravity.
 	if not is_on_floor():
-		print(get_gravity())
 		velocity += get_gravity() * 0.6 * delta
 
 	# Handle jump.
+	jump_progress_bar.value = (vel_storage / JUMP_VELOCITY) * 100.0 # get percentage of jump to full
 	if is_on_floor():
 		can_jump = true
 		
@@ -53,6 +54,7 @@ func jump() -> void:
 	self.velocity.y = vel_storage
 	vel_storage = 0
 	can_jump = false
+	jump_progress_bar.value = 0
 
 func add_jump() -> void:
 	if vel_storage > JUMP_VELOCITY:
@@ -67,3 +69,4 @@ func cut_jump() -> void:
 
 func _on_coyote_timer_timeout() -> void:
 	can_jump = false
+	vel_storage = 0

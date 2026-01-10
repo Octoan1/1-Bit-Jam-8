@@ -1,9 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://crjun1osn8gvr"]
+[gd_scene load_steps=9 format=3 uid="uid://crjun1osn8gvr"]
 
 [ext_resource type="Script" uid="uid://be8cxhekqa8bc" path="res://player.gd" id="1_4flbx"]
-[ext_resource type="Texture2D" uid="uid://d0x5qbmtmhe8e" path="res://Assets/player.png" id="2_onrkg"]
+[ext_resource type="Texture2D" uid="uid://d0x5qbmtmhe8e" path="res://Assets/Player/player.png" id="2_onrkg"]
 [ext_resource type="Script" uid="uid://n32kq0xp0rfp" path="res://area_2d.gd" id="3_hqtel"]
-[ext_resource type="Texture2D" uid="uid://w4qt4682u1h0" path="res://Assets/vision_5.png" id="4_hqtel"]
+[ext_resource type="Texture2D" uid="uid://w4qt4682u1h0" path="res://Assets/Player/Vision/vision_5.png" id="4_hqtel"]
+[ext_resource type="Texture2D" uid="uid://bgsdmbf6hhmhv" path="res://Assets/Player/Jump/jump_empty.png" id="5_2hs0m"]
+[ext_resource type="Texture2D" uid="uid://dmv6h0ymncibi" path="res://Assets/Player/Jump/jump_border.png" id="6_b26j0"]
+[ext_resource type="Texture2D" uid="uid://cfntar0bwydm2" path="res://Assets/Player/Jump/jump_full.png" id="7_1jxqw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hqtel"]
 size = Vector2(4, 7)
@@ -36,8 +39,22 @@ scale = Vector2(2, 2)
 polygon = PackedVector2Array(-23, -2, -22.5, 2, 18, 16, 21.5, 4.5, 21.5, -6, 18, -15)
 
 [node name="CoyoteTimer" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.15
 one_shot = true
+
+[node name="JumpProgressBar" type="TextureProgressBar" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -6.0
+offset_right = 8.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_under = ExtResource("5_2hs0m")
+texture_over = ExtResource("6_b26j0")
+texture_progress = ExtResource("7_1jxqw")
 
 [connection signal="area_entered" from="Pivot/Area2D" to="Pivot/Area2D" method="_on_area_entered"]
 [connection signal="area_exited" from="Pivot/Area2D" to="Pivot/Area2D" method="_on_area_exited"]
