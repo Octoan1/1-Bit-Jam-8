@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://q6d5njggjite"]
+
+[ext_resource type="Script" uid="uid://c84kr4kaqmnad" path="res://Entities/Enemies/Old/enemy.gd" id="1_7o3vr"]
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_7o3vr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]

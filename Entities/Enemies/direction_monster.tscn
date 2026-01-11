@@ -1,0 +1,71 @@
+[gd_scene load_steps=11 format=3 uid="uid://541yilrm06gf"]
+
+[ext_resource type="Script" uid="uid://crsyfxiv4qs57" path="res://Entities/Enemies/direction_monster.gd" id="1_cpw8k"]
+[ext_resource type="Texture2D" uid="uid://c3qssl57g5wv2" path="res://Assets/Monster/worm_monster-Sheet.png" id="1_eqkie"]
+[ext_resource type="Script" uid="uid://0u3wamvca3ef" path="res://Components/hitbox_component.gd" id="2_7npda"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eqkie"]
+size = Vector2(120.5, 6.5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7npda"]
+atlas = ExtResource("1_eqkie")
+region = Rect2(0, 0, 128, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cpw8k"]
+atlas = ExtResource("1_eqkie")
+region = Rect2(128, 0, 128, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xyc0p"]
+atlas = ExtResource("1_eqkie")
+region = Rect2(256, 0, 128, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bpboa"]
+atlas = ExtResource("1_eqkie")
+region = Rect2(384, 0, 128, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_012vw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7npda")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cpw8k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xyc0p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bpboa")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cpw8k"]
+size = Vector2(123, 8)
+
+[node name="DirectionMonster" type="AnimatableBody2D"]
+collision_layer = 4
+collision_mask = 7
+script = ExtResource("1_cpw8k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_eqkie")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_012vw")
+frame_progress = 0.7421666
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+visible = false
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("2_7npda")
+metadata/_custom_type_script = "uid://0u3wamvca3ef"
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("RectangleShape2D_cpw8k")
+debug_color = Color(0.93970114, 0.18680477, 0.4148062, 0.41960785)

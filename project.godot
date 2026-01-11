@@ -13,7 +13,7 @@ config_version=5
 config/name="1-Bit-gj"
 run/main_scene="uid://c6atm2yi8er2y"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="uid://citcqautofykg"
+config/icon="uid://bh6xtrm027aan"
 
 [display]
 

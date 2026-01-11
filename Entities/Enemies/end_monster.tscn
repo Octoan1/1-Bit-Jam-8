@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://cnu5riawn34hp"]
+
+[ext_resource type="Script" uid="uid://bclndndvb8ejp" path="res://Entities/Enemies/end_monster.gd" id="1_7fueh"]
+[ext_resource type="Texture2D" uid="uid://hewu2boobmhm" path="res://Assets/Monster/end_monster-Sheet.png" id="1_pjbbf"]
+[ext_resource type="Texture2D" uid="uid://di86l234ic7qb" path="res://Assets/Monster/end_monster_bulb.png" id="2_truqp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_truqp"]
+size = Vector2(104, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7fueh"]
+atlas = ExtResource("1_pjbbf")
+region = Rect2(112, 0, 112, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_truqp"]
+atlas = ExtResource("1_pjbbf")
+region = Rect2(0, 0, 112, 56)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r211i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7fueh")
+}],
+"loop": true,
+"name": &"close_mouth",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_truqp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7fueh"]
+radius = 6.0
+
+[node name="EndMonster" type="StaticBody2D"]
+script = ExtResource("1_7fueh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 22.5)
+shape = SubResource("RectangleShape2D_truqp")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_r211i")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 5
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+z_index = -1
+texture = ExtResource("2_truqp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_7fueh")
+debug_color = Color(0.53932613, 0.5680179, 0.013985256, 0.41960785)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
-@onready var sprite: Sprite2D = $Sprite2D
+signal died
+
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var pivot: Node2D = $Pivot
 
 @export var SPEED = 100.0
@@ -9,6 +11,7 @@ extends CharacterBody2D
 var vel_storage : float = 0
 var can_jump : bool = true
 var gravity
+var can_move : bool = true
 @onready var jump_progress_bar: TextureProgressBar = $JumpProgressBar
 
 
@@ -17,11 +20,11 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	
-	
 	# Add the gravity.
 	if not is_on_floor():
-		velocity += get_gravity() * 0.6 * delta
+		velocity += get_gravity() * 0.5 * delta
 
+	
 	# Handle jump.
 	jump_progress_bar.value = (vel_storage / JUMP_VELOCITY) * 100.0 # get percentage of jump to full
 	if is_on_floor():
@@ -32,7 +35,7 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_pressed("jump") and can_jump:
 		add_jump()
-		print(vel_storage)
+		#print(vel_storage)
 	if Input.is_action_just_released("jump") and can_jump:
 		jump()
 
@@ -41,12 +44,17 @@ func _physics_process(delta: float) -> void:
 	var direction : float = Input.get_axis("move_left", "move_right")
 	if direction:
 		velocity.x = direction * SPEED
+		sprite.play("walk")
 		sprite.flip_h = !(direction > 0)
 	else:
+		sprite.play("default")
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		
 	var mouse_pos = get_global_mouse_position()
 	pivot.look_at(mouse_pos)
+
+	if not can_move:
+		velocity.x = 0
 
 	move_and_slide()
 
@@ -70,3 +78,9 @@ func cut_jump() -> void:
 func _on_coyote_timer_timeout() -> void:
 	can_jump = false
 	vel_storage = 0
+
+
+func _on_hurtbox_component_damaged() -> void:
+	print("player died")
+	died.emit()
+	
