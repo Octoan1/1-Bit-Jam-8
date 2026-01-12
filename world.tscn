@@ -72,7 +72,7 @@ SPEED = 50.0
 [node name="Monster" type="Sprite2D" parent="."]
 visible = false
 material = SubResource("ShaderMaterial_036b0")
-position = Vector2(-32, 161)
+position = Vector2(-160, 138)
 texture = ExtResource("4_036b0")
 
 [node name="Area2D" type="Area2D" parent="Monster"]
