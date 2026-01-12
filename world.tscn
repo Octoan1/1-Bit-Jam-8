@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://c6atm2yi8er2y"]
+[gd_scene load_steps=24 format=4 uid="uid://c6atm2yi8er2y"]
 
 [ext_resource type="TileSet" uid="uid://dg4fkxgoqm0vo" path="res://tileset_128x128.tres" id="1_aqk2v"]
 [ext_resource type="Script" uid="uid://dvdvo0bo8irx7" path="res://UI/world.gd" id="1_pkg7o"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://0u3wamvca3ef" path="res://Components/hitbox_component.gd" id="10_70uel"]
 [ext_resource type="PackedScene" uid="uid://dp8yg3evmspk5" path="res://UI/end_screen.tscn" id="12_2o6r5"]
 [ext_resource type="AudioStream" uid="uid://v1b4e8lnrv50" path="res://Assets/Audio/longer_song.wav" id="14_70uel"]
+[ext_resource type="Script" uid="uid://bgkv36jg76y38" path="res://music.gd" id="15_2u3nc"]
 [ext_resource type="AudioStream" uid="uid://tw5jaqs2ynjw" path="res://Assets/Audio/pickupCoin.wav" id="15_hiqwa"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_036b0"]
@@ -39,7 +40,6 @@ size = Vector2(47.75, 10)
 size = Vector2(62.875, 10)
 
 [node name="World" type="Node2D"]
-process_mode = 3
 script = ExtResource("1_pkg7o")
 
 [node name="Tilemap" type="Node2D" parent="."]
@@ -217,6 +217,7 @@ process_mode = 3
 stream = ExtResource("14_70uel")
 volume_db = -5.0
 autoplay = true
+script = ExtResource("15_2u3nc")
 
 [node name="MenuOpen" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_hiqwa")
