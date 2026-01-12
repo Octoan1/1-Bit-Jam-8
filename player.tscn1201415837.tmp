@@ -1,0 +1,122 @@
+[gd_scene load_steps=15 format=3 uid="uid://crjun1osn8gvr"]
+
+[ext_resource type="Script" uid="uid://be8cxhekqa8bc" path="res://player.gd" id="1_4flbx"]
+[ext_resource type="Texture2D" uid="uid://dqdwf7qjtrpyw" path="res://Assets/Player/player_walk-Sheet.png" id="2_dw050"]
+[ext_resource type="Script" uid="uid://n32kq0xp0rfp" path="res://area_2d.gd" id="3_hqtel"]
+[ext_resource type="Texture2D" uid="uid://w4qt4682u1h0" path="res://Assets/Player/Vision/vision_5.png" id="4_hqtel"]
+[ext_resource type="Texture2D" uid="uid://bgsdmbf6hhmhv" path="res://Assets/Player/Jump/jump_empty.png" id="5_2hs0m"]
+[ext_resource type="Texture2D" uid="uid://dmv6h0ymncibi" path="res://Assets/Player/Jump/jump_border.png" id="6_b26j0"]
+[ext_resource type="Texture2D" uid="uid://cfntar0bwydm2" path="res://Assets/Player/Jump/jump_full.png" id="7_1jxqw"]
+[ext_resource type="Script" uid="uid://dv00abx3gq0gk" path="res://Components/hurtbox_component.gd" id="8_dw050"]
+[ext_resource type="AudioStream" uid="uid://dtj101ualpjgi" path="res://Assets/Audio/footstep.wav" id="9_b26j0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hqtel"]
+size = Vector2(4, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b26j0"]
+atlas = ExtResource("2_dw050")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7ghd"]
+atlas = ExtResource("2_dw050")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1jxqw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b26j0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b26j0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n7ghd")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b26j0"]
+size = Vector2(6, 7.5)
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_4flbx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_hqtel")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_1jxqw")
+frame_progress = 0.5476505
+
+[node name="Pivot" type="Node2D" parent="."]
+position = Vector2(0, -1)
+
+[node name="Area2D" type="Area2D" parent="Pivot"]
+position = Vector2(41, 5)
+script = ExtResource("3_hqtel")
+
+[node name="Vision" type="Sprite2D" parent="Pivot/Area2D"]
+z_index = -4
+position = Vector2(9, -5)
+texture = ExtResource("4_hqtel")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Pivot/Area2D"]
+position = Vector2(9, -5)
+scale = Vector2(2, 2)
+polygon = PackedVector2Array(-23, -2, -22.5, 2, 18, 16, 21.5, 4.5, 21.5, -6, 18, -15)
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
+[node name="JumpProgressBar" type="TextureProgressBar" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -6.0
+offset_right = 8.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_under = ExtResource("5_2hs0m")
+texture_over = ExtResource("6_b26j0")
+texture_progress = ExtResource("7_1jxqw")
+
+[node name="HurtboxComponent" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("8_dw050")
+metadata/_custom_type_script = "uid://dv00abx3gq0gk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+position = Vector2(0, 0.25)
+shape = SubResource("RectangleShape2D_b26j0")
+debug_color = Color(0.27588207, 0.6306, 0.12818658, 0.41960785)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_b26j0")
+volume_db = -15.0
+pitch_scale = 2.13
+attenuation = 3.732131
+
+[node name="FootStep" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[connection signal="area_entered" from="Pivot/Area2D" to="Pivot/Area2D" method="_on_area_entered"]
+[connection signal="area_exited" from="Pivot/Area2D" to="Pivot/Area2D" method="_on_area_exited"]
+[connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
+[connection signal="damaged" from="HurtboxComponent" to="." method="_on_hurtbox_component_damaged"]
+[connection signal="timeout" from="FootStep" to="." method="_on_foot_step_timeout"]

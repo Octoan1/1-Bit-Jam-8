@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://cnu5riawn34hp"]
+[gd_scene load_steps=11 format=3 uid="uid://cnu5riawn34hp"]
 
 [ext_resource type="Script" uid="uid://bclndndvb8ejp" path="res://Entities/Enemies/end_monster.gd" id="1_7fueh"]
 [ext_resource type="Texture2D" uid="uid://hewu2boobmhm" path="res://Assets/Monster/end_monster-Sheet.png" id="1_pjbbf"]
 [ext_resource type="Texture2D" uid="uid://di86l234ic7qb" path="res://Assets/Monster/end_monster_bulb.png" id="2_truqp"]
+[ext_resource type="AudioStream" uid="uid://cj11xd6kggwvu" path="res://Assets/Audio/powerUp.wav" id="5_0j6u5"]
+[ext_resource type="AudioStream" uid="uid://b45m38gsm3j6y" path="res://Assets/Audio/hitHurt.wav" id="5_aspk7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_truqp"]
 size = Vector2(104, 5)
@@ -59,5 +61,12 @@ texture = ExtResource("2_truqp")
 position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_7fueh")
 debug_color = Color(0.53932613, 0.5680179, 0.013985256, 0.41960785)
+
+[node name="DeathAudio" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = ExtResource("5_aspk7")
+
+[node name="CollectAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_0j6u5")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bxbshn46oybpn"]
+[gd_scene load_steps=9 format=3 uid="uid://bxbshn46oybpn"]
 
 [ext_resource type="Texture2D" uid="uid://c03hswwgl08re" path="res://Assets/UI/MainMenu/cover.png" id="1_neu3s"]
 [ext_resource type="Texture2D" uid="uid://damwwxjhd3imm" path="res://Assets/UI/MainMenu/play_button_base.png" id="1_q5qyg"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://gyr6f40i26p3" path="res://Assets/UI/MainMenu/play_button_selected.png" id="2_f14c5"]
 [ext_resource type="Texture2D" uid="uid://bd50iwsyeu4rf" path="res://Assets/UI/MainMenu/quit_button_base.png" id="4_rcgl7"]
 [ext_resource type="Texture2D" uid="uid://1sudguumhh1w" path="res://Assets/UI/MainMenu/quit_button_selected.png" id="5_yqwmv"]
+[ext_resource type="AudioStream" uid="uid://tw5jaqs2ynjw" path="res://Assets/Audio/pickupCoin.wav" id="7_yqwmv"]
+[ext_resource type="AudioStream" uid="uid://6g6u23dv1pi8" path="res://Assets/Audio/blipSelect.wav" id="8_2cbuu"]
 
 [node name="StartMenu" type="Control"]
 process_mode = 2
@@ -43,5 +45,18 @@ layout_mode = 2
 texture_normal = ExtResource("4_rcgl7")
 texture_hover = ExtResource("5_yqwmv")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("7_yqwmv")
+volume_db = -10.0
+pitch_scale = 0.9
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("8_2cbuu")
+volume_db = -20.0
+
+[connection signal="mouse_entered" from="VBoxContainer/PlayButton" to="." method="_on_play_button_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
